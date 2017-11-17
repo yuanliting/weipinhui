@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+<body>
+<h1>这是添加单个品牌的小图片的页面</h1>
+<form action="" method="post">
+    品牌的名字: <input type="text" name="sigleBrandName" required><br><br>
+    品牌的小图片:  <input type="file" name="photo" /><br /><br>
+    <button type="submit">提交</button>
+</form>
+</body>
+<script>
+    $('form').submit(function (ev) {
+        ev.preventDefault();
+        var data = new FormData(this);
+        $.post({
+            url:'/sigleBrandSmall',
+            data:data,
+            contentType:false,
+            processData:false,
+            success:function (resData) {
+                if(resData.error == 0){
+//                    console.log(resData);
+                    alert(resData.message);
+                    location.href = '/';
+                }else{
+                    alert(resData.message);
+                    location.href = '/sigleBrandSmall';
+                }
+            }
+        })
+    })
+</script>
+</html>

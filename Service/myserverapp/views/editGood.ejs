@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+</head>
+<body>
+
+<form action="/editGoodH"  method="post">
+    该商品的id: <input type="text" name="id" value="<%= good._id%>" >不要更改<br>
+    品牌名字: <br><input type="text" name="brandName" value="<%= good.brandName %>" disabled required><br>
+    商品名称: <br><input type="text" name="goodName" value="<%= good.goodName %>" disabled required><br>
+    商品原价: <br><input type="text" name="originalPrice" value="<%= good.originalPrice %>"><br>
+    商品现价格:<br><input type="number" name="goodPrice" value="<%= good.goodPrice %>" required><br>
+    商品的折扣: <br><input type="text" name="goodDis" value="<%= good.goodDis %>" required><br>
+    该商品属于 :<br><input type="text" name="categorys" value="<%= good.categorys[0] %>" required>类型的 <br>
+    该商品的优惠券: <br><input type="text" name="discount" value="<%= good.discount %>"  required>元<br>
+    该商品的尺码: <br><select name="size" id="">
+        <option value=""><%= good.size%></option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+    </select><br>
+    商品产地： <br><input type="text" name="yieldly" value="<%= good.yieldly %>"  required> <br>
+    商品材质: <br> <input type="text" name="texture" value="<%= good.texture %>"  required> <br>
+    商品流行元素: <br><input type="text" name="fashion_element"  value="<%= good.fashion_element %>"  required><br>
+    商品的功效: <br><input type="text" name="goodFunction"  value="<%= good.goodFunction %>"   required><br>
+    商品适合皮肤: <br> <input type="text" name="skin" value="<%= good.skin %>"  ><br>
+    商品的类型: <br><input type="text" name="goodType" value="<%= good.goodType %>"><br>
+    商品的有效期 ： <br> <input type="text" name="timeLimit" value="<%= good.timeLimit %>" ><br>
+    商品的规格: <br> <input type="text" name="specification" value="<%= good.specification %>"><br>
+    该商品的详情页面: <br><input type="text" name="detail" value="<%= good.detail %>" ><br>
+    商品描述:<br> <textarea name="good_describe" id="" cols="70" rows="10">
+        <%= good.good_describe%>
+    </textarea><br><br>
+    客服: <br><input type="text" name="controller"  value="<%= good.controller %>"  required><br><br>
+    <input type="file" name="photo" disabled /><br /><br>
+    <button type="submit">更改商品</button>
+</form>
+</body>
+<script>
+    $('form').submit(function(ev){
+        //阻止表单的默认事件
+        ev.preventDefault();
+        //自定义一个表单提交请求：路径，数据，回调函数
+        var data = $(this).serialize();
+        //发送请求：
+        $.post({
+            url:'/editGoodH',
+            data:data,
+            success:function (result) {
+                console.log('2345')
+                console.log(result);
+            }
+        })
+
+    })
+</script>
+</html>

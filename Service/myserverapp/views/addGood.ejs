@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <script src="/javascripts/jquery.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>欢迎添加<%= brandName%>旗下的商品</h1>
+<div class="center">
+    <div class="right">
+<ul class="rightUl">
+   <% goods.forEach(function (item,index) { %>
+    <li class="rightLi">
+        <a href="">
+            <img  class="brandImg" src="<%= item.goodImg %>" alt="">
+            <p><%= item.goodName%></p>
+            <p><a href="/editGood/<%= item._id%>">编辑</a>&#x3000;<a href="/removeGoodBehind/<%= item._id%>">删除</a></p>
+        </a>
+    </li>
+   <% })%>
+</ul>
+    </div>
+    <section class="left">
+        <form method="post">
+            品牌名字: <br><input type="text" name="brandName"  required><br>
+            商品名称: <br><input type="text" name="goodName" required><br>
+            商品原价: <br><input type="text" name="originalPrice"><br>
+            商品现价格:<br><input type="number" name="goodPrice" required><br>
+            商品的折扣: <br><input type="text" name="goodDis" required><br>
+            该商品属于 :<br><input type="text" name="categorys" required>类型的 <br>
+            该商品的优惠券: <br><input type="text" name="discount" required>元<br>
+            该商品的尺码: <br><select name="size" id="">
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select><br>
+            商品产地： <br><input type="text" name="yieldly" required> <br>
+            商品材质: <br> <input type="text" name="texture" required> <br>
+            商品流行元素: <br><input type="text" name="fashion_element" required><br>
+            商品的功效: <br><input type="text" name="goodFunction" required><br>
+            商品适合: <br> <input type="text" name="skin"><br>
+            商品的类型: <br><input type="text" name="goodType"><br>
+            商品的有效期 ： <br> <input type="text" name="timeLimit"><br>
+            商品的规格: <br> <input type="text" name="specification"><br>
+            该商品的详情页面: <br><input type="text" name="detail"><br>
+            商品描述:<br> <textarea name="good_describe" id="" cols="70" rows="10"></textarea><br><br>
+            客服: <br><input type="text" name="controller" required><br><br>
+            <input type="file" name="photo" /><br /><br>
+            <button type="submit">添加商品</button>
+        </form>
+    </section>
+</div>
+
+</body>
+<script>
+    $('form').submit(function (ev) {
+        ev.preventDefault();
+        var data = new FormData(this);
+        $.post({
+            url:'/adding',
+            data:data,
+            contentType:false,
+            processData:false,
+            success:function (resData) {
+                if(resData.error == 0){
+//                    console.log(resData);
+                    alert(resData.message);
+                    location.href = '/';
+                }else{
+                    alert(resData.message);
+                    location.href = '/adding';
+                }
+            }
+        })
+    })
+
+
+</script>
+</html>

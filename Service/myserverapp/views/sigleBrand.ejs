@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+<body>
+<h1>这是添加单个品牌的页面</h1>
+<form action="" method="post">
+    品牌的名字: <input type="text" name="sigleBrandName" required><br><br>
+    该品牌的标题: <input type="text" name="brandTitle" required><br>
+    品牌折扣为 : <input type="text" name="brandDiscount" required>折<br><br>
+    品牌的图片:  <input type="file" name="photo" /><br /><br>
+    该品牌搞的是 ：<input type="text" name="brandAction" required>活动 <br><br>
+    该品牌的优惠券: <input type="number" name="discount" required>元，红包 <br><br>
+    该品牌的描述: <input type="text" name="describe" required> <br><br>
+    <button type="submit">提交</button>
+</form>
+</body>
+<script>
+    $('form').submit(function (ev) {
+        ev.preventDefault();
+        var data = new FormData(this);
+        $.post({
+            url:'/sigleBrand',
+            data:data,
+            contentType:false,
+            processData:false,
+            success:function (resData) {
+                if(resData.error == 0){
+//                    console.log(resData);
+                    alert(resData.message);
+                    location.href = '/';
+                }else{
+                    alert(resData.message);
+                    location.href = '/sigleBrand';
+                }
+            }
+        })
+    })
+</script>
+</html>

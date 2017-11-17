@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%=  title %></title>
+    <script src="/javascripts/jquery.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>首页</h1>
+<div class="centers">
+    <div class="left second">
+        <ul class="leftUl">
+            <li>
+                <a href="/nav">添加前端的导航的内容吧</a>
+            </li>
+            <li>
+                <a href="/brand">去添加品牌的信息吧</a>
+            </li>
+            <li>
+                <a href="/sigleBrand">添加单个品牌的首页大图片</a>
+            </li>
+            <li >
+                <a href="/sigleBrandSmall">添加单个品牌的小图片</a>
+            </li>
+            <li >
+                <a href="/big">添加搜索页面大分类</a>
+            </li>
+            <li>
+                <a href="/small">添加搜索页面添加小分类</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="rightUl  first">
+        <% brands.forEach(function (item,index) {%>
+        <li class="rightLi">
+            <a href="/addGood/<%= item._id%>">
+                <img class="brandImg" src="<%= item.brandImg%>" alt="">
+            </a>
+            <p class="brandName"><%= item.brandName%> </p>
+            <p><a  href="/dehindRemoveBrand/<%= item._id%>/<%= item.brandType%>">删除</a></p>
+        </li>
+       <% })%>
+     
+
+    </ul>
+</div>
+</div>
+</body>
+</html>

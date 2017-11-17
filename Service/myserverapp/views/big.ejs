@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title%></title>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+<body>
+<h1>这是添加大分类页面</h1>
+<form action="">
+    <input type="text" name="bigClassifyName"><br>
+
+    <button type="submit">提交</button>
+</form>
+</body>
+<script>
+    $('form').submit(function(ev){
+        //阻止表单的默认事件
+        ev.preventDefault();
+        //自定义一个表单提交请求：路径，数据，回调函数
+        var data = $(this).serialize();
+        //发送请求：
+        $.post({
+            url:'/big',
+            data:data,
+            success:function (result) {
+                console.log('2345')
+                console.log(result);
+                if(result.error == 0){
+                    alert(result.message);
+                    location.href = '/';
+                }else{
+                    alert(result.message);
+                }
+
+            }
+        })
+
+    })
+
+</script>
+</html>
